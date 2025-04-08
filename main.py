@@ -4,7 +4,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import os
 from groq import Groq
-client = Groq(api_key="....",)
+
+key = os.getenv("key")
+
+client = Groq(api_key=key,)
 
 
 app = FastAPI()
