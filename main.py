@@ -13,7 +13,7 @@ client = Groq(api_key=key,)
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-html = f"""
+html = """
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +36,7 @@ html = f"""
 @app.get("/")
 async def root():
     return HTMLResponse(html)
-    
+
 @app.get("/atomcamp")
 async def atomcamp():
     return "Hello this is our experiment endpoint .............."
@@ -48,14 +48,14 @@ async def april():
 @app.get("/chat/{q}")
 async def groq(q):
     chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": q,
-        }
-    ],
-    model="llama3-8b-8192",
-)
+        messages=[
+            {
+                "role": "user",
+                "content": q,
+            }
+        ],
+        model="llama3-8b-8192",
+    )
 
 #print(chat_completion.choices[0].message.content)
     return str(chat_completion.choices[0].message.content)
